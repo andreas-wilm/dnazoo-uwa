@@ -3,7 +3,7 @@
 ## Cluster Configuration File ##
 ################################
 
-[cluster dnazoo]
+[cluster dnazoo-uwa]
 FormLayout = selectionpanel
 Category = Applications
 
@@ -20,7 +20,7 @@ Autoscale = $Autoscale
         [[[cluster-init cyclecloud/pbspro:default]]]
         Optional = True
         
-        [[[cluster-init dnazoo:default:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:default:1.0.0]]]
         Optional = True
 
         [[[configuration]]]
@@ -35,7 +35,7 @@ Autoscale = $Autoscale
 
         [[[cluster-init cyclecloud/pbspro:master]]]
 
-        [[[cluster-init dnazoo:master:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:master:1.0.0]]]
         Optional = True
 
         [[[network-interface eth0]]]
@@ -58,7 +58,7 @@ Autoscale = $Autoscale
 
         [[[cluster-init cyclecloud/pbspro:execute]]]
 
-        [[[cluster-init dnazoo:execute:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:execute:1.0.0]]]
         Optional = True
 
 
@@ -69,9 +69,9 @@ Autoscale = $Autoscale
 [parameters About]
 Order = 1
 
-    [[parameters About dnazoo]]
+    [[parameters About dnazoo-uwa]]
 
-        [[[parameter dnazoo]]]
+        [[[parameter dnazoo-uwa]]]
         HideLabel = true
         Config.Plugin = pico.widget.HtmlTemplateWidget
         Config.Template = '''<p>Insert template description here</p>'''
@@ -147,8 +147,8 @@ Order = 20
         Description = The credentials for the cloud provider
         ParameterType = Cloud.Credentials
 
-    [[parameters dnazoo Settings ]]
-    Description = "Section for configuring dnazoo"
+    [[parameters dnazoo-uwa Settings ]]
+    Description = "Section for configuring dnazoo-uwa"
     Order = 5
 
         

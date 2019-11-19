@@ -25,6 +25,7 @@ Autoscale = $Autoscale
 	slurm.version = $configuration_slurm_version
 
         [[[cluster-init cyclecloud/slurm:default]]]
+        Optional = True
 
         [[[cluster-init dnazoo-uwa:default:1.0.0]]]
         Optional = True
