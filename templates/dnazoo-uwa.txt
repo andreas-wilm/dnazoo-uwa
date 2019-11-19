@@ -3,7 +3,7 @@
 ## Cluster Configuration File ##
 ################################
 
-[cluster dnazoo]
+[cluster dnazoo-uwa]
 FormLayout = selectionpanel
 Category = Applications
 
@@ -25,7 +25,7 @@ Autoscale = $Autoscale
 	slurm.version = $configuration_slurm_version
         [[[cluster-init cyclecloud/slurm:default]]]
 
-        [[[cluster-init dnazoo:default:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:default:1.0.0]]]
         Optional = True
 
 
@@ -38,7 +38,7 @@ Autoscale = $Autoscale
 
         [[[cluster-init cyclecloud/slurm:master]]]
 
-        [[[cluster-init dnazoo:master:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:master:1.0.0]]]
         Optional = True
 
         [[[network-interface eth0]]]
@@ -81,7 +81,7 @@ Autoscale = $Autoscale
 
         [[[cluster-init cyclecloud/slurm:execute]]]
 
-        [[[cluster-init dnazoo:execute:1.0.0]]]
+        [[[cluster-init dnazoo-uwa:execute:1.0.0]]]
         Optional = True
 
 
@@ -89,12 +89,12 @@ Autoscale = $Autoscale
         AssociatePublicIpAddress = $ExecuteNodesPublic
 
 
-[parameters About]
+[parameters About-uwa]
 Order = 1
 
-    [[parameters About dnazoo]]
+    [[parameters About dnazoo-uwa]]
 
-        [[[parameter dnazoo]]]
+        [[[parameter dnazoo-uwa]]]
         HideLabel = true
         Config.Plugin = pico.widget.HtmlTemplateWidget
         Config.Template = '''<p>DNAZoo CycleCloud template</p>'''
@@ -170,8 +170,8 @@ Order = 20
         Description = The credentials for the cloud provider
         ParameterType = Cloud.Credentials
 
-    [[parameters dnazoo Settings ]]
-    Description = "Section for configuring dnazoo"
+    [[parameters dnazoo-uwa Settings ]]
+    Description = "Section for configuring dnazoo-uwa"
     Order = 5
 
         
