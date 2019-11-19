@@ -5,7 +5,7 @@
 
 [cluster dnazoo-uwa]
 FormLayout = selectionpanel
-Category = Applications
+Category = Schedulers 
 
 Autoscale = $Autoscale
 
@@ -17,12 +17,13 @@ Autoscale = $Autoscale
     Region = $Region
     KeyPairLocation = ~/.ssh/cyclecloud.pem
 
-        [[[configuration]]]
-    	cyclecloud.selinux.policy = permissive
-        cyclecloud.maintenance_converge.enabled = false
+        #[[[configuration]]]
+    	#cyclecloud.selinux.policy = permissive
+        #cyclecloud.maintenance_converge.enabled = false
 
         [[[configuration]]]
 	slurm.version = $configuration_slurm_version
+
         [[[cluster-init cyclecloud/slurm:default]]]
 
         [[[cluster-init dnazoo-uwa:default:1.0.0]]]
@@ -33,7 +34,8 @@ Autoscale = $Autoscale
     MachineType = $MasterMachineType
     IsReturnProxy = $ReturnProxy
     AdditionalClusterInitSpecs = $MasterClusterInitSpecs
-    
+    #ImageName = $ImageName
+
         [[[configuration]]]
 
         [[[cluster-init cyclecloud/slurm:master]]]
@@ -72,24 +74,27 @@ Autoscale = $Autoscale
     [[nodearray execute]]
     MachineType = $ExecuteMachineType
     MaxCoreCount = $MaxExecuteCoreCount
+    #ImageName = $ImageName
 
     Interruptible = $UseLowPrio
     AdditionalClusterInitSpecs = $ExecuteClusterInitSpecs
 
 
         [[[configuration]]]
+        slurm.autoscale = true
+        slurm.default_partition = true
+        slurm.hpc = true
 
         [[[cluster-init cyclecloud/slurm:execute]]]
 
         [[[cluster-init dnazoo-uwa:execute:1.0.0]]]
         Optional = True
 
-
         [[[network-interface eth0]]]
         AssociatePublicIpAddress = $ExecuteNodesPublic
 
 
-[parameters About-uwa]
+[parameters About]
 Order = 1
 
     [[parameters About dnazoo-uwa]]
@@ -110,7 +115,7 @@ Order = 10
         Label = Region
         Description = Deployment Location
         ParameterType = Cloud.Region
-        DefaultValue = westus2
+        DefaultValue = southeastasia
 
         [[[parameter MasterMachineType]]]
         Label = Master VM Type
@@ -122,7 +127,7 @@ Order = 10
         Label = Execute VM Type
         Description = The VM type for execute nodes
         ParameterType = Cloud.MachineType
-        DefaultValue = Standard_F2s_v2
+        DefaultValue = Standard_F2
         Config.Multiselect = true
 
 
