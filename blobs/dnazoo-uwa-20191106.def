@@ -1,0 +1,36 @@
+Bootstrap: docker
+
+From: aidenlab/juicer
+
+%post
+    apt-get update
+    apt-get -y install g++ cmake zlib1g-dev
+    git clone https://github.com/gonzalogacc/w2rap-contigger.git
+    cd w2rap-contigger
+    cmake -D CMAKE_CXX_COMPILER=g++ .  
+    # not needed for older GCC versions
+    # Download https://raw.githubusercontent.com/andreas-wilm/dnazoo-quokka/master/w2rap-contigger_issue31.patch?token=AAILSCPUZ7UKOGYXUJ4QYM25YKFAI (change of address when open)
+    # patch -p0 < w2rap-contigger_issue31.patch
+    make -j 2
+    cp bin/* /usr/local/bin/
+    cd ..
+    rm -rf w2rap-contigger
+    apt-get -y remove g++ cmake zlib1g-dev
+    apt-get -y autoremove
+    
+%environment
+    export LC_ALL=C 
+    # GAWK has the 'and' function, needed for chimeric_blacklist
+    alias awk=gawk
+    export PATH=/opt:/opt/scripts:/opt/scripts/common:$PATH
+
+%runscript
+    juicer.sh -D /opt $@
+
+%labels
+    Author andreas.wilm@microsoft.com
+    Version 0.0.1
+
+%help
+    This is a container for DNAZoo, originally created to help with the Quokka assembly
+
